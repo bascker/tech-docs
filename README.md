@@ -12,7 +12,17 @@ tech-docs
 |- java
 |- linux
 |- |-- ansible
+|- |-- shell
+|- |-- 下载管理
+|- |-- 文件管理
+|- |-- 文本管理
+|- |-- 权限管理
+|- |-- 系统管理
+|- |-- 网络管理
+|- |-- 虚拟化管理
 |- network          # 网络文档
+|- openstack
+|- |-- aodh
 |- server
 |- |-- httpd
 |- |-- jetty
