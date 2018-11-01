@@ -57,3 +57,17 @@ $ ip link set eno16777728 name eth0
 ```
 
 > CentOS 下网卡配置目录：**/etc/sysconfig/network-scripts/**
+
+## 案例
+配置网络，将ip固化
+```
+# 编辑网卡文件
+$ vim /etc/sysconfig/network-scripts/ifconfig-eth0
+
+# 重启网卡。
+$ ifdown eth0
+$ ifup eth0
+
+# 校验
+$ ip a
+```
