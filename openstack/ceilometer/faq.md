@@ -1,9 +1,8 @@
 # FAQ
-
-## 1.使用 _**ceilometer meter-list **_仅显示一部分计量项
+## 1.使用 **ceilometer meter-list**仅显示一部分计量项
 **场景**：使用 ceilometer meter-list 查看计量项，发现仅仅只显示了云上资源的计量项，而云下资源的未显示。查看数据库却发现数据库中存有云下的计量项
 
-**原因**：ceilometer.conf 文件的配置中 _**\[api\] **_部分的默认值_** default\_api\_return\_limit = 100**_ 太小，显示不全
+**原因**：ceilometer.conf 文件的配置中 [api]部分的默认值default_api_return_limit = 100 太小，显示不全
 
 ```
 $ cat ceilometer.conf
@@ -20,11 +19,9 @@ $ cat ceilometer.conf
 # Minimum value: 1
 #default_api_return_limit = 100
 ```
-
-**解决**：修改配置文件，将 _**default\_api\_return\_limit  **_取值加大
+**解决**：修改配置文件，将 **default_api_return_limit**取值加大
 
 ## 2.ceilometer 对接 mongodb 时，ceilometer-collector 出错
-
 **场景**：ceilometer 使用 mongodb 作为后端数据库时，ceilometer-collector.log 中报错 "no master"
 
 **原因**：当前 mongodb 的集群为副本集群，ceilometer.conf 中配置 mongodb 接入点不是 mongodb 的 master 节点，非 master 无法对数据进行读写操作，因此报错
@@ -32,11 +29,9 @@ $ cat ceilometer.conf
 **解决**：修改配置，将接入点改为 mongodb 的 master 节点
 
 ## 3.ceilometer 监控云上资源获取不到 memory.usage 的监控项
-
 **场景**：ceilometer 监控云上资源时，使用 ceilometer meter-list 获取不到 memory.usage 信息
 
 **原因**：当前环境中，所有的虚机全部是基于 cirros 镜像启动的，而该镜像内不包含 virtio 驱动，导致无法获取到 VM 内存的信息。且日志报错如下
-
 ```
 $ cat ceilometer-polling.log
 INFO ceilometer.agent.manager [-] Polling pollster network.outgoing.packets in the context of meter_source
@@ -45,7 +40,6 @@ WARNING ceilometer.compute.pollsters.memory [-] Cannot inspect data of MemoryUsa
 ```
 
 对比环境：使用cirros创建的云实例
-
 ```
 $ virsh list
  Id    Name                           State
@@ -83,7 +77,6 @@ $ python
 ```
 
 使用带 virtio 驱动的镜像创建的云实例
-
 ```
 $ virsh list
  Id    Name                           State
@@ -106,7 +99,6 @@ rss 469276
 ```
 
 **解决**：使用带 virtio 的镜像创建虚机，即可
-
 ```
 $ glance image-create --name centos7 --progress \
                       --disk-format iso --container-format bare --visibility public --progress \
@@ -134,14 +126,12 @@ $ ceilometer meter-list | grep memory | grep -v hard
 | memory.usage                             | gauge      | MB        | 371974c5-0d5b-4f7a-8f5d-49aa9122245a                                  | c7da6129403046f0aba48e5c597749b9 | 6c161e993e6d
 ```
 
-> 要获取VM内存使用详细信息，VM中需要安装virtio驱动并且支持memballoon。Linux一般都会包含该驱动\(通过 lsmod \| grep virtio 查看\)，但是windows的virtio驱动需要自己在镜像中安装。
+> 要获取VM内存使用详细信息，VM中需要安装virtio驱动并且支持memballoon。Linux一般都会包含该驱动(通过 lsmod | grep virtio 查看)，但是windows的virtio驱动需要自己在镜像中安装。
 
 ## 4.如何对 ceilometer 的数据进行自定义处理？
-
 **场景**：新版本中 ceilometer 对 memory.usage 的获取默认是取实际使用多少 MB 的内存，而不是百分比。
 
 **解决**：在 pipeline.yaml 中定义 memory 的数据处理流程
-
 ```
 # 定义 polling 获取的 memory.usage 数据要经过 memory_sink 的处理，将结果公布到 memory.util
 $ vim pipeline.yaml
@@ -184,7 +174,6 @@ $ ceilometer statistics -m memory.util
 ```
 
 上面是直接使用 memory.usage 来处理的，也可以通过 memory.usage + memory.resident 一起处理：
-
 ```
 $ vim pipeline.yaml
 ...
@@ -211,11 +200,9 @@ $ ceilometer statistics -m memory.util
 ```
 
 ## 5.ceilomete meter-list 无 hardware.disk.\* 计量项
-
 **场景**：使用`ceilometer meter-list` 命令查看不到`hardware.disk.*` 的计量项
 
 **原因**：使用 snmpwalk 命令爬取 disk 的 数据，显示无实例拥有该 OID 值，连 snmp 都获取不到，自然 ceilometer 无此数据了。使用命令`df -hT` 查看，显示磁盘情况如下：
-
 ```
 $ df -hT
 Filesystem                 Type      Size  Used Avail Use% Mounted on
@@ -223,7 +210,6 @@ Filesystem                 Type      Size  Used Avail Use% Mounted on
 ...
 /dev/mapper/rootvol        xfs       281G  8.0G  273G   3% /etc/hostname
 ```
-
 主机磁盘挂载目录是 `/etc/hostname`, 而本人配置磁盘扫描目录却是 `/etc/hosts`，因此扫描不到数据
 
 **解决**：修改 `rootvol`的正确挂载点，或修改 snmp 扫描目录
