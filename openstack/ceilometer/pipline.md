@@ -1,6 +1,6 @@
 # pipeline
 ## 简介
-pipeline 的默认配置文件是 pipeline.yaml，其配置也可以在 ceilometer.conf 中以 pipeline\cfg\file 参数来配置。一个职责链的定义的语法格式如下所示：
+pipeline 的默认配置文件是 pipeline.yaml，其配置也可以在 ceilometer.conf 中以 pipeline_cfg_file 参数来配置。一个职责链的定义的语法格式如下所示：
 ```
 ---
 sources:
@@ -39,7 +39,7 @@ sinks:
 
 通过 pipeline.yaml 中定义 meter 的 transformer 来对 meter 进行数据处理，如单位转换，计算等。ceilometer支持以下 **5 种** transformer：
 
-1.**rate\_of\_change**
+1.**rate_of_change**
 ```
 # 对cpu数据进行转换
 transformers:
@@ -51,7 +51,7 @@ transformers:
               type: "gauge"
               scale: "100.0 / (10**9 * (resourcemetadata.cpunumber or 1))"
 ```
-将 cpu 的数据转换后，将值传给 cpu\_util \(该计量项是自定义的，也可写成 cpu.util\)
+将 cpu 的数据转换后，将值传给 cpu_util (该计量项是自定义的，也可写成 cpu.util)
 
 > 注：无法将一个已经定义好的 meter 的数据处理后，再赋值给它。必须是取另一个名字，从而生成一个新的 meter 项来保存
 
@@ -72,8 +72,8 @@ transformers:
 ```
 
 该定义的意思是将如下 meter 项的值转为 disk.1.2.rate. 其上数字 1, 2 分别代表分组后索引位置的元素值：
-* 1：表示匹配 \(read\|write\) 的值，取值 read 或 write
-* 2：表示匹配 \(bytes\|requests\) 的值，取值 bytes 或 requests
+* 1：表示匹配 (read|write) 的值，取值 read 或 write
+* 2：表示匹配 (bytes|requests) 的值，取值 bytes 或 requests
 
 ```
 # 源数据
@@ -97,9 +97,9 @@ disk.device.write.bytes.rate
 disk.device.write.requests.rate
 ```
 
-2.**unit\_conversion**
+2.**unit_conversion**
 
-单位转换器，和 **rate\_of\_chang**一样，支持 scale、mapfrom和mapto
+单位转换器，和 **rate_of_chang**一样，支持 scale、mapfrom和mapto
 
 ```
 transformers:
