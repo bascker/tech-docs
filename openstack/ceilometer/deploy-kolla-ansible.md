@@ -1,6 +1,6 @@
 # Kolla-Ansible 下 Ceilometer 部署
 ## register.yml
-\(a\) Creating the Ceilometer service and endpoint：创建服务和访问点
+(a) Creating the Ceilometer service and endpoint：创建服务和访问点
 ```
 $ openstack service list
 +----------------------------------+-------------+----------------+
@@ -20,7 +20,7 @@ $ openstack endpoint list
 +----------------------------------+-----------+--------------+----------------+---------+-----------+-----------------------------------------------+
 ```
 
-\(b\) Creating the Ceilometer project, user, and role：创建 ceilometer 用户和角色添加
+(b) Creating the Ceilometer project, user, and role：创建 ceilometer 用户和角色添加
 ```
 $ openstack user create --project service \
                         --project-domain Default \
@@ -46,7 +46,7 @@ $ openstack user list --project service
 ```
 
 ## config.yml
-\(a\) Ensuring config directories exist
+(a) Ensuring config directories exist
 ```
 $ mkdir -p /etc/kolla/ceilometer-notification \
            /etc/kolla/ceilometer-collector \
@@ -55,29 +55,29 @@ $ mkdir -p /etc/kolla/ceilometer-notification \
            /etc/kolla/ceilometer-compute
 ```
 
-\(b\) Copying over config.json files for services：解析 j2 文件，拷贝到各目录
+(b) Copying over config.json files for services：解析 j2 文件，拷贝到各目录
 
-\(c\) Copying over ceilometer-api.conf
+(c) Copying over ceilometer-api.conf
 ```
 $ template/wsgi-ceilometer-api.conf.j2 --> /etc/kolla/ceilometer/wsgi-ceilometer-api.conf
 ```
 
-\(d\) Copying over ceilometer.conf
+(d) Copying over ceilometer.conf
 
-\(e\) Copying over event and pipeline yaml for notification service
+(e) Copying over event and pipeline yaml for notification service
 
-\(f\) Check if policies shall be overwritten
+(f) Check if policies shall be overwritten
 
-\(g\) Copying over existing policy.json
+(g) Copying over existing policy.json
 
 ### 3.bootstrap.yml
-\(a\) Checking Ceilometer mysql database：此处本人设置为 mysql
+(a) Checking Ceilometer mysql database：此处本人设置为 mysql
 ```
 $ vim /etc/kolla/globals.yml
 ceilometer_database_type == "mysql"
 ```
 
-\(b\) Creating Ceilometer mysql database
+(b) Creating Ceilometer mysql database
 ```
 $ show databases;
 +--------------------+
@@ -108,14 +108,14 @@ $ show tables;
 14 rows in set (0.00 sec)
 ```
 
-\(c\) Creating Ceilometer database user and setting permissions：创建数据库用户和设置权限
+(c) Creating Ceilometer database user and setting permissions：创建数据库用户和设置权限
 ```
 > use mysql;
 > select * from user;
 | %          | ceilometer | *C1675B3C1A9C7E9974B9A2F7FCD0EB49A8AF00CA | N  .....
 ```
 
-\(d\) Running Ceilometer bootstrap container  --&gt; bootstrap\_service.yml
+(d) Running Ceilometer bootstrap container  --&gt; bootstrap\_service.yml
 
 挑选第一个 controller 做初始化： delegate\_to: "{{ groups\['ceilometer-api'\]\[0\] }}"
 ```
@@ -133,8 +133,8 @@ $ docker run \
 ```
 
 ### 4.start.yml
-(a) Starting ceilometer-notification container
-(b) Starting ceilometer-api container
-(c) Starting ceilometer-central container
-(d) Starting ceilometer-collector container
+(a) Starting ceilometer-notification container  
+(b) Starting ceilometer-api container  
+(c) Starting ceilometer-central container  
+(d) Starting ceilometer-collector container  
 (e) Starting ceilometer-compute container
