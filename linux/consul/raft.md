@@ -25,7 +25,7 @@ Raft 分为一下 **2 个阶段**：选举 + 操作
 5. 心跳：Leader 节点开始发送心跳信息给 Follower 节点，**Follower 节点收到心跳信息后又重置自己晋升为 Candiadate 节点的进度**，并返回心跳信号给 Leader，告诉
 它是存活的。
 
-**[Q]**从枚举 Leader  的过程中知道，有 2 个阶段 Follower 会重置晋升进度，那么**什么时候 Follower 不重置晋升 Candiadate 的进度**？
+**[Q]**从枚举 Leader  的过程中知道，有 2 个阶段 Follower 会重置晋升进度，那么**什么时候 Follower 不重置晋升 Candiadate 的进度**？  
 **[A]**很简单，当 Follower 节点无法同 Leader 通信后，它无法收到 Leader 发出的 heartbeat 信息，此时就不会重置晋升为 Candiadate 节点的进度，它会继续自己的晋升
 进度，直到在 election timeout 时间内成功晋升为 Candiadate 节点，然后发起投票，最后成为新的 Leader。或者 Follower 节点在接受到 heartbeat 之前就完成了晋升为
 Candiadate 阶段，成为 Candiadate 节点后，即使受到 heartbeat 也不需要重置了。
@@ -66,6 +66,6 @@ Candiadate 阶段，成为 Candiadate 节点后，即使受到 heartbeat 也不�
 oplog 都是 commit 状态的。因此当网络恢复后， new_leader 会发送心跳给 NodeB 和 NodeA，让他们向自己同步，NodeB 和 NodeA 的数据会回滚之前 uncommited 的操作，并
 将保持和 new_leader 一致，且 NodeB 从 old_leader 状态降级，变成普通的 follower，从而保证数据的一致性。
 
-**[Q]** 若分区时客户端请求的操作不是同一个呢？即 client1 请求存储 {"age": 20}, client2 请求存储 {"name": "bascker"}，那么分区后的数据怎么办？
+**[Q]** 若分区时客户端请求的操作不是同一个呢？即 client1 请求存储 {"age": 20}, client2 请求存储 {"name": "bascker"}，那么分区后的数据怎么办？  
 **[A]** 对于非同一操作，client2 请求 old_leader 存储数据的 oplog 依旧是 uncommitted，在网络恢复后回滚该操作，使其生效。若是同一操作，如 client1 设置 age = 20
 , 而 client2 设置 age = 30，那么以 oplog 的**时间戳**为准，那个是最新的操作，就同步哪个数据.
