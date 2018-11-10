@@ -23,6 +23,8 @@ tech-docs
 |- network          # 网络文档
 |- openstack
 |- |-- aodh
+|- |-- ceilometer
+|- python
 |- server
 |- |-- httpd
 |- |-- jetty

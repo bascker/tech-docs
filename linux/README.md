@@ -1,6 +1,7 @@
 # README
 
 * [ansible](ansible)
+* [consul](consul)
 * [shell](shell)
 * [下载管理](下载管理)
 * [文件管理](文件管理)
