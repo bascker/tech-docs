@@ -3,6 +3,8 @@
 * [ansible](ansible)
 * [consul](consul)
 * [ELK](ELK)
+* [etcd](etcd)
+* [fluentd](fluentd)
 * [shell](shell)
 * [下载管理](下载管理)
 * [文件管理](文件管理)
