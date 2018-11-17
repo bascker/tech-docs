@@ -7,7 +7,9 @@ tech-docs
 |- |-- mxnet
 |- big-data
 |- db
+|- |-- mongodb
 |- |-- mysql
+|- |-- postgresql
 |- |-- redis
 |- java
 |- linux
