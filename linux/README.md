@@ -6,6 +6,7 @@
 * [etcd](etcd)
 * [fluentd](fluentd)
 * [shell](shell)
+* [zabbix](zabbix)
 * [下载管理](下载管理)
 * [文件管理](文件管理)
 * [文本管理](文本管理)
