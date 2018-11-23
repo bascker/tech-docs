@@ -1,3 +1,4 @@
 # README
 * [基础](base)
-* [安装](deploy.md)
+* [kubernetes](kubernete)
+* [应用案例](sample)
