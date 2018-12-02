@@ -3,20 +3,19 @@
 
 * 用于获取网络文件或信息
 * 选项
-  * **-o**：指定文件保存位置
-  * **-O**：使用URL中默认的文件名保存文件到本地
+  * -o：指定文件保存位置
+  * -O：使用URL中默认的文件名保存文件到本地
   * -C：断点续传
-  * **-X**：指定哪种命令\(PUT,GET,DELETE,HEAD等\)
-  * **-s**：静音模式，不输出标准错误内容
+  * -X：指定哪种命令(PUT,GET,DELETE,HEAD等)
+  * -s：静音模式，不输出标准错误内容
   * -v：verbose 信息
-  * **-i**：输出响应头
+  * -i：输出响应头
   * -k：用于https认证
+  * --connect-timeout: 连接超时时间
 * 配置文件：**.curlrc**
 
 ## 案例
-
 1.获取响应头
-
 ```
 $ curl -i http://10.158.113.158:9200/_cat/indices?v
 HTTP/1.1 200 OK
@@ -30,29 +29,23 @@ yellow open   log-2017.01.10        5   1      24552            0      7.8mb    
 
 2.消除 curl 的标准错误信息：2种方法
 
-\[带标准错误情况\]
 
 ```
+# 带标准错误情况
 $ curl -i http://10.158.113.158:9200/_cat/indices?v > aa
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1395  100  1395    0     0  18415      0 --:--:-- --:--:-- --:--:-- 18600
-```
 
-\[法1：使用 -s\]
 
-```
+# 法1：使用 -s
 $ curl -is http://10.158.113.158:9200/_cat/indices?v > aa
-```
 
-\[法2：重定向\]
-
-```
+# 法2：重定向
 $ curl -i http://10.158.113.158:9200/_cat/indices?v > aa 2>/dev/null
 ```
 
 3.配置文件** .curlrc** 的使用：
-
 ```
 $ cat .curlrc
 # curl default options
@@ -77,6 +70,3 @@ $ curl http://10.158.113.158:9200
 }
 curl (http://10.158.113.158:9200/): response: 200, time: 0.002, size: 368
 ```
-
-
-

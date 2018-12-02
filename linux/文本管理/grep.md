@@ -4,6 +4,7 @@
 * 用于字符串匹配查找
 * grep -i：忽略大小写
 * grep -v：排除xxx字符
+* grep -R: 递归匹配查找
 * grep str file：在 file  中查找字符串 str
 * grep -r 3.6 /root：在路径中递归查找字符串 3.6
 
