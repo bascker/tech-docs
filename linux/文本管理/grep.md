@@ -1,6 +1,5 @@
 # grep
-## 简介
-
+## 一、简介
 * 用于字符串匹配查找
 * grep -i：忽略大小写
 * grep -v：排除xxx字符
@@ -8,7 +7,34 @@
 * grep str file：在 file  中查找字符串 str
 * grep -r 3.6 /root：在路径中递归查找字符串 3.6
 
-## 正则式
+## 二、案例
+1.grep去掉空行和注释
+```
+# 查看文本
+$ cat test.txt
+a
+
+b
+#c
+d
+#e
+f
+
+# 去除空行和注释
+$ grep -Ev "^$|^[#;]" test.txt
+a
+b
+d
+f
+```
+
+2.搭配 tailf 实时跟踪所需要的信息，常用于日志跟踪
+```
+# 跟踪 tomcat 访问日志，查看 1b2a3c 用户的 api 请求
+$ tailf localhost_access_log.txt | grep 1b2a3c
+```
+
+## 三、正则式
 ```
 ^          # 锚定行的开始 如：'^grep'匹配所有以grep开头的行
 $          # 锚定行的结束 如：'grep$'匹配所有以grep结尾的行

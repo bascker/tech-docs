@@ -1,4 +1,4 @@
-# PV\(Physical Volume\)系列命令
+# PV(Physical Volume)系列命令
 ## 简介
 用于管理物理卷相关的命令。
 
@@ -9,7 +9,6 @@
 
 ## 案例
 **创建 pv 卷**
-
 ```
 $ lsblk
 NAME            MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT

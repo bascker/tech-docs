@@ -1,7 +1,6 @@
-# LV\(logic volume\)相关命令
+# LV(logic volume)相关命令
 ## 简介
 用于逻辑卷的相关命令
-
 1. **lvscan**：检查当前系统是否存在 lv
 2. **lvs**：列出所有 lv
 3. **lvcreate**：创建 lv

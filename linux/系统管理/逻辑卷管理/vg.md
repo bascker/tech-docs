@@ -1,7 +1,6 @@
-# VG\(Volume Group\)系列命令
+# VG(Volume Group)系列命令
 ## 简介
 用于管理卷组的相关命令
-
 1. **vgscan**：检查当前系统是否存在 vg
 2. **vgs**：显示所有vg
 3. **vgcreate**：用于创建LVM卷组
@@ -9,13 +8,11 @@
 
 ## 案例
 1.创建逻辑卷组 cinder-volumes，并将 pv 卷 /dev/sdb 加入该LVM卷组
-
 ```
 $ vgcreate cinder-volumes /dev/sdb
 ```
 
 2.查看 vg 卷
-
 ```
 $ vgscan
   Reading all physical volumes.  This may take a while...
