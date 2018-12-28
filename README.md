@@ -34,6 +34,7 @@ tech-docs
 |- openstack
 |- |-- aodh
 |- |-- ceilometer
+|- os
 |- python
 |- server
 |- |-- httpd

@@ -2,6 +2,7 @@
 * [awk](awk.md)
 * [crudini](crudini.md)
 * [cut](cut.md)
+* [doc2unix](doc2unix.md)
 * [grep](grep.md)
 * [head](head.md)
 * [read](read.md)
