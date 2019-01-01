@@ -1,11 +1,11 @@
 # Servlet
-## 简介
+## 一、简介
 1. 没有图形界面，运行在服务器端，是由**Servlet容器**(如Tomca、Jetty)调用
 2. 能直接和Web服务器交互，能在各程序之间共享数据
 3. 每一个请求都是由一个轻量级的 Java 线程调用，而不是启动一个新的进程，让重量级的 OS 进程调用(一般，CGI 对于每一个请求都是
 重新启动一个进程进行处理，这也是 Servlet 和 CGI 的不同)
 
-## 重定向 vs. 转发
+## 二、重定向 vs. 转发
 | **特征** | **重定向：redirect** | **转发：forward |
 | :--- | :--- | :--- |
 | 实现方式 | `response.sendRedirect(path);` | `getRequestDispathcer(path).forward(request, response);` |
@@ -13,3 +13,14 @@
 | 数据共享 | 得到目标页面后，request 中的参数、属性值都将丢失 | 不会丢失 request 中的信息 |
 | 效率 | 高 | 低 |
 | 场景 | 1.防止信息泄漏场景，如跳转到服务器以外的url。2.用户退出系统 | 1.用户登录跳转  2.临时数据较大 |
+
+## 三、Servlet3.0 请求异步
+Tomcat7.x 之后，支持 Servlet3.0 请求异步化。之前都是同步的，比如一个请求的处理过程：
+1. Tomcat 容器收到 Http 请求，转为 HttpServletRequest 对象
+2. Servlet 进行业务处理
+3. 通过 HttpServletResponse 进行业务响应
+
+这个阶段，都是在同一个 Tomcat 线程中完成的，即请求解析与业务处理是无法分割的。而在实现了 Servler3.0 规范的 Tomcat7.x 中，
+就可以将请求处理与业务处理进行分离。
+
+> 请求异步化，不会提升系统响应时间，而是提升系统的吞吐率以及灵活性（请求解析 & 业务分离等）
