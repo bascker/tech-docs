@@ -14,3 +14,4 @@ IN | 在某数值集合中 | 同 `<>` | 名字是否是规定的三个中的一�
 AND | 与运算符 | 同 `<>` | WHERE age = 20 and sex = 'male'
 OR | 或运算符 | 同 `<>` | WHERE (age > 20 OR age < 10) OR name = 'bascker'
 NOT | 非运算符，取反 | 同 `<>` | WHERE name NOT LIKE 'b%' 或者 WHERE char NOT BETWEEN a AND g
+AS | 别名 | | SELECT p.city as city_name FROM person as p;
