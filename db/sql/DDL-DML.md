@@ -9,12 +9,21 @@ DML 部分定义了 SQL 的查询、更新、删除指令：
 * INSERT INTO：插入数据, `INSERT INTO table_name VALUES(...)`
 
 ## 二、DML：数据定义语言
-DDL 部分定义了 SQL 的创建或删除表格、索引、约束等指令。举例如：
-* CREATE DATABASE: 创建数据库
-* ALTER DATABASE: 修改数据库
-* CREATE TABLE: 创建数据表
-* ALTER TABLE: 修改数据表
-* DROP TABLE: 删除数据表
-* CREATE INDEX: 创建索引
-* ALTER INDEX: 修改索引
-* DROP INDEX: 删除索引
+DDL 部分定义了 SQL 的创建或删除表格、索引、约束等指令。不同数据库，语法存在差异。
+
+指令 | 描述 | 示例
+---- | ---- | ----
+CREATE DATABASE | 创建数据库 | `CREATE DATABASE neutron`
+ALTER DATABASE | 修改数据库 | 
+CREATE TABLE | 创建数据表 | 
+ALTER TABLE | 修改数据表 | `ALTER TABLE vpcs ADD name VARCHAR(255)` 或 `ALTER TABLE vpcs DROP COLUMN name`
+DROP TABLE | 删除数据表，包括数据和表结构 | `CREATE TABLE vpcs(name VARCHAR(255) NOT NULL)`
+TRUNCATE TABLE | 删除表数据，保留表结构 | `TRUNCATE TABLE vpcs` 
+CREATE INDEX | 创建索引 | `CREATE INDEX vpc_index ON vpcs(name desc)` 降序索引 vpcs 表中的 name 
+ALTER INDEX | 修改索引 | 
+DROP INDEX | 删除索引 | `DROP INDEX vpc_index`
+CREATE VIEW | 创建视图 | `CREATE VIEW vpc_view AS SELECT name FROM vpcs WHERE name LIKE 'vpc%'`
+DELETE | 删除 | `DELETE FROM vpcs WHERE name LIKE 'vpc%'`
+UPDATE | 更新 | `UPDATE vpcs SET updated_at = created_at`
+
+
