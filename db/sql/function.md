@@ -1,7 +1,5 @@
 # 函数
 ## 一、日期
-current_timestamp()：返回当前时间
-
 函数 | 描述 | 示例
 ---- | ---- | -----
 NOW() | 返回当前日期时间, 格式 YYYY-MM-DD HH:MM:SS | `SELECT now() as now_time;`
