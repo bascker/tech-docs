@@ -1,9 +1,0 @@
-# README
-* [简介](introduction.md)
-* [配置](config.md)
-* [部署](deploy.md)
-* [API](api.md)
-* [数据存储](data-storage.md)
-* [分片](shard.md)
-* [并发](concurrent.md)
-* [文档](document.md)
